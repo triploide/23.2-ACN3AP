@@ -1,21 +1,26 @@
 <?php
 
-include 'usuarios.php';
-include 'funciones.php';
+require 'usuarios.php';
+require 'funciones.php';
+require 'Usuario.php';
 
-$usuario = recuperarInfoDeUsuario($_POST['email'], $usuarios);
+$usuarioArray = recuperarInfoDeUsuario($_POST['email'], $usuarios);
 
-if (!$usuario) {
+if (!$usuarioArray) {
     header('Location: login.php');
     exit;
 }
 
-$esValido = verificarPass($_POST['password'], $usuario['password']);
+$usuario = new Usuario($_POST['email'], $usuarioArray['password'], $usuarioArray['nombre'], $usuarioArray['fecha_nacimiento']);
+
+$esValido = $usuario->esValido($_POST['password']);
 
 if (!$esValido) {
     header('Location: login.php');
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +40,19 @@ if (!$esValido) {
                 <h3>Perfil</h3>
                 <p>
                     <strong>Nombre:</strong>
-                    <?php echo $usuario['nombre']; ?>
+                    <?php echo $usuario->nombre; ?>
                 </p>
                 <p>
                     <strong>Email:</strong>
-                    <?php echo $usuario['email']; ?>
+                    <?php echo $usuario->email; ?>
                 </p>
                 <p>
                     <strong>Fecha de nacimiento:</strong>
-                    <?php echo fechaParaHumanos($usuario['fecha_nacimiento']); ?>
+                    <?php echo $usuario->getFechaNacimiento(); ?>
                 </p>
                 <p>
                     <strong>Edad:</strong>
-                    <?php echo calcularEdad($usuario['fecha_nacimiento']); ?>
+                    <?php echo $usuario->getEdad(); ?>
                 </p>
             </div>
         </div>
