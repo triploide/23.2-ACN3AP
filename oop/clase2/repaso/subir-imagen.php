@@ -2,7 +2,8 @@
 
 require 'UploadedFile.php';
 
-$file = new UploadeFile;
-var_dump($file->getFormattedSize());
+echo '<pre>';
+$file = new UploadeFile('imagen');
+$file->save('path');
 
 // header('location: exito.php'); exit;

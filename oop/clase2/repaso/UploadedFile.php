@@ -2,9 +2,30 @@
 
 class UploadeFile
 {
+    public $data;
+
+    public function __construct($name)
+    {
+        $this->data = $_FILES[$name];
+    }
+
     public function getSize()
     {
-        return 1232220;
+        return $this->data['size'];
+    }
+
+    public function getExtension()
+    {
+        $name = $this->data['name'];
+
+        $nameArray = explode('.', $name);
+
+        return array_pop($nameArray);
+    }
+
+    public function save($path)
+    {
+        // TODO:
     }
 
     public function getFormattedSize()
