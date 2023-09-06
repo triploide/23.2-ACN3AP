@@ -9,7 +9,7 @@ class Juego
         $this->objetos = [];
     }
 
-    public function agregarObjeto($objeto)
+    public function agregarObjeto(Renderizable $objeto)
     {
         $this->objetos[] = $objeto;
     }
