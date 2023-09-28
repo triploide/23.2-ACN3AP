@@ -1,5 +1,7 @@
 <?php
 
+namespace Practica\Database;
+
 class Image
 {
     private $pdo;
@@ -8,8 +10,8 @@ class Image
     public function __construct()
     {
         try {
-            $this->pdo = new PDO('mysql:dbname=test;chartset=UTF-8;host=localhost', 'root', '');
-        } catch (PDOException $e) {
+            $this->pdo = new \PDO('mysql:dbname=test;chartset=UTF-8;host=localhost;port=3463', 'root', '');
+        } catch (\PDOException $e) {
             echo $e->getMessage();
         }
     }
@@ -20,7 +22,7 @@ class Image
 
         $stmt = $image->pdo->prepare('SELECT * FROM images WHERE id = :id');
         $stmt->execute(['id' => $id]);
-        $response = $stmt->fetch(PDO::FETCH_ASSOC);
+        $response = $stmt->fetch(\PDO::FETCH_ASSOC);
         
         $image->setData($response);
 

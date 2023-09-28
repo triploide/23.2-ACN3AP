@@ -1,5 +1,7 @@
 <?php
 
+namespace Practica\Intervention;
+
 class Image
 {
     private $resource;
