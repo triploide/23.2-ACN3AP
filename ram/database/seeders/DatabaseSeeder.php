@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         $movies = json_decode(file_get_contents(public_path('movies.json')), true);
 
         \DB::table('movies')->insert($movies);

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Backoffice\MovieController as BackofficeMovieController;
+use App\Http\Controllers\Example\MovieController as ExampleMovieController;
+use App\Http\Controllers\Example\RequestController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,23 @@ Route::get('juegos', function () {
 Route::get('juegos/{id}', function () {
     return view('juego');
 });
+
+// -------------------
+// ----- EXAMPLE -----
+// -------------------
+
+Route::get('example/request/form', [RequestController::class, 'form']);
+Route::post('example/request/all', [RequestController::class, 'all']);
+Route::post('example/request/input', [RequestController::class, 'input']);
+Route::post('example/request/only', [RequestController::class, 'only']);
+Route::post('example/request/except', [RequestController::class, 'except']);
+Route::post('example/request/dot-notation', [RequestController::class, 'dotNotation']);
+
+Route::get('example/movies', [ExampleMovieController::class, 'index']);
+Route::get('example/movies/create', [ExampleMovieController::class, 'create']);
+Route::post('example/movies', [ExampleMovieController::class, 'store']);
+Route::get('example/movies/{id}/edit', [ExampleMovieController::class, 'edit']);
+Route::post('example/movies/{id}', [ExampleMovieController::class, 'update']);
 
 
 
