@@ -13,9 +13,5 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
-        $movies = json_decode(file_get_contents(public_path('movies.json')), true);
-
-        \DB::table('movies')->insert($movies);
     }
 }

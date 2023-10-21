@@ -50,5 +50,4 @@ Route::prefix('peliculas')->controller(MovieController::class)->name('web.movies
     Route::get('/{id}', 'show')->name('show');
 });
 
-
 Route::get('backoffice/movies', [BackofficeMovieController::class, 'index']);
