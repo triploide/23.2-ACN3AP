@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="#">Movies</a></li>
+    <li class="breadcrumb-item"><a href="#">Películas</a></li>
     <li class="breadcrumb-item active" aria-current="page">Listado</li>
 @endsection
 
@@ -19,26 +19,18 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach($movies as $movie)
-                <tr>
-                    <td><img style="width: 80px" src="{{ $movie['poster'] }}" alt="{{ $movie['title'] }}"></td>
-                    <td>{{ $movie['title'] }}</td>
-                    <td>{{ $movie['year'] }}</td>
-                    <td>
-                        <a href="" class="btn btn-primary"><span class="fa fa-pencil"></span></a>
-                        <a href="" class="btn btn-danger"><span class="fa fa-trash"></span></a>
-                    </td>
-                </tr>
-            @endforeach --}}
-
             @forelse ($movies as $movie)
                 <tr>
                     <td><img style="width: 80px" src="{{ $movie->poster }}" alt="{{ $movie->title }}"></td>
                     <td>{{ $movie->title }}</td>
                     <td>{{ $movie->since() }}</td>
                     <td>
-                        <a href="" class="btn btn-primary"><span class="fa fa-pencil"></span></a>
-                        <a href="" class="btn btn-danger"><span class="fa fa-trash"></span></a>
+                        <a href="{{ route('backoffice.movies.edit', ['movie' => $movie->id]) }}" class="btn btn-primary"><span class="fa fa-pencil"></span></a>
+                        <form action="{{ route('backoffice.movies.destroy', ['movie' => $movie->id]) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                        </form>
                     </td>
                 </tr>
             @empty
@@ -51,13 +43,9 @@
         </tbody>
     </table>
 
-    @if (count($movies) > 3)
-        <p>
-            @for ($i = 1; $i <= 3; $i++)
-                <a href="movies/page/{{ $i }}">{{ $i }}</a>
-            @endfor
-        </p>
-    @else
-        <p>No hay más pelis</p>
-    @endif
+    <div class="menu pmd-floating-action" role="navigation">
+		<a href="{{ route('backoffice.movies.create') }}" class="floating-btn-custon pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised btn-success"> 
+			<span class="fa fa-plus"></span>
+		</a>
+	</div>
 @endsection

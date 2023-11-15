@@ -52,7 +52,14 @@ Route::prefix('peliculas')->controller(MovieController::class)->name('web.movies
 
 
 Route::prefix('backoffice')->name('backoffice.')->group(function () {
-    Route::get('movies', [BackofficeMovieController::class, 'index'])->name('movies.index');
+    // Route::get('movies', [BackofficeMovieController::class, 'index'])->name('movies.index');
+    // Route::get('movies/create', [BackofficeMovieController::class, 'create'])->name('movies.create');
+    // Route::post('movies', [BackofficeMovieController::class, 'store'])->name('movies.store');
+    // Route::get('movies/{movie}/edit', [BackofficeMovieController::class, 'edit'])->name('movies.edit');
+    // Route::patch('movies/{movie}', [BackofficeMovieController::class, 'update'])->name('movies.update');
+    // Route::delete('movies/{movie}', [BackofficeMovieController::class, 'destroy'])->name('movies.destroy');
+
+    Route::resource('movies', BackofficeMovieController::class);
 });
 
 
